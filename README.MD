@@ -6,4 +6,3 @@
 
 ### pip install -r requirements.txt
 
-### <https://ghhban.axshare.com/>   ->    123456
