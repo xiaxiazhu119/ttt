@@ -1,0 +1,73 @@
+<div id="console-review-statistics">
+
+  <br>
+
+  <div class="data-container">
+    <p xngDataLoading [isLoading]="dataLoading"></p>
+    <p xngDataNotFound [count]="list.length"></p>
+    <div *ngIf="list.length > 0" class="data-container">
+      <div class="data-list data-list-striped container-fluid" [ngClass]="{'compact' : isSM}">
+        <div class="data-header-row data-row row">
+          <div class="col-4 col-md-3">评审人</div>
+          <div class="col-2 col-md-3">评分</div>
+          <div class="col-4 d-none d-sm-block">评审时间</div>
+        </div>
+        <div class="data-item-row data-row row" *ngFor="let item of list">
+          <div class="col-4 col-md-3">{{item.name}}</div>
+          <div class="col-2 col-md-3">{{item.totalScore}}</div>
+          <div class="col-4 d-none d-sm-block">{{item.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+          <div class="col-2 d-none d-md-block">
+            <button mat-button color="primary" (click)="viewInDialog(item)">查看</button>
+          </div>
+          <div class="col-2 d-md-none">
+            <a href="javascript:;" class="text-primary" (click)="viewInSlide(item)">&nbsp;查看&nbsp;</a>
+          </div>
+        </div>
+
+      </div>
+      <br>
+      <!-- <x-ng-libs-bs-pagination [paginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></x-ng-libs-bs-pagination> -->
+    </div>
+  </div>
+
+  <div class="review-detail-container" [ngClass]="{'active': active}">
+    <br>
+    <div class="container-fluid">
+      <div class="row">
+        <h2 class="col-12 strong">评审详情</h2>
+      </div>
+      <div class="row">
+        <label class="col-3 strong pr-0">评审人</label>
+        <div class="col-9">{{currentReview.name}}</div>
+      </div>
+      <div class="row">
+        <label class="col-3 strong pr-0">评分</label>
+        <div class="col-9">
+          <ul>
+            <li *ngFor="let score of currentReview.scores">{{score.name}}: {{score.value}}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-3 strong pr-0">总分</label>
+        <div class="col-9">{{currentReview.totalScore}}</div>
+      </div>
+      <div class="row">
+        <label class="col-3 strong pr-0">评审意见</label>
+        <pre class="col-9">{{currentReview.opinion}}</pre>
+      </div>
+      <div class="row">
+        <label class="col-3 strong pr-0">评审时间</label>
+        <pre class="col-9">{{currentReview.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</pre>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-12 text-center">
+          <button mat-raised-button color="primary" (click)="close()">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

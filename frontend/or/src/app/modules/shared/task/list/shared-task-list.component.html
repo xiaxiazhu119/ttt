@@ -1,0 +1,87 @@
+<div class="shared-task-list">
+
+  <app-base-sc [keywordPlaceholder]="'名称'" [sc]="sc" (searchClicked)="search()" (createClicked)="goToCreate()" [hasCreate]="hasCreate"></app-base-sc>
+
+  <div class="data-container">
+    <p xngDataLoading [isLoading]="dataLoading"></p>
+    <p xngDataNotFound [count]="list.length"></p>
+    <div *ngIf="list.length > 0" class="data-container">
+      <div class="data-list data-list-striped container-fluid" [ngClass]="{'compact' : isSM}">
+        <div class="data-header-row data-row row">
+          <div class="col-7 col-md-3">名称</div>
+          <div class="col-md-3 d-none d-md-block text-center">征集日期</div>
+          <div class="col-md-3 d-none d-md-block text-center">评审日期</div>
+          <!-- <div class="col-3 col-sm-2 col-lg-1 text-center">状态</div> -->
+          <!-- <div class="col-5 col-md-3"></div> -->
+        </div>
+        <div class="data-item-row data-row row" *ngFor="let item of list">
+          <div class="col-7 col-md-3">
+            <a href="javascript:;" (click)="goToView(item.id)">{{item.name}}</a>
+          </div>
+          <div class="col-md-3 d-none d-md-block text-center p-0">{{item.levyStartDate | date: 'yyyy-MM-dd'}} ~ {{item.levyEndDate | date: 'yyyy-MM-dd'}}</div>
+          <div class="col-md-3 d-none d-md-block text-center p-0">{{item.reviewStartDate | date: 'yyyy-MM-dd'}} ~ {{item.reviewEndDate | date: 'yyyy-MM-dd'}}</div>
+          <!-- <div class="col-3 col-sm-2 col-lg-1 text-center p-0">状态状态</div> -->
+
+          <ng-container [ngSwitch]="user.role">
+            <ng-container *ngSwitchCase="roleEnum.Normal">
+              <div class="col-5 col-md-3" [ngClass]="{'text-success': item.userSubmitted}">
+                {{item.userSubmitted ? '已参与' : '未参与'}}
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="roleEnum.Expert">
+
+            </ng-container>
+            <ng-container *ngSwitchCase="roleEnum.Org">
+
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <ng-container *ngIf="!item.taskStarted || isSA">
+                <div class="col-md-3 d-none d-md-block">
+                  <button mat-button color="primary" (click)="goToEdit(item.id)">编辑</button>
+                  <button mat-button color="accent" (click)="delete(item.id)">删除</button>
+                </div>
+                <div class="col-5 d-md-none">
+                  <a href="javascript:;" class="text-primary" (click)="goToEdit(item.id)">&nbsp;编辑&nbsp;</a>
+                  <!-- <a href="javascript:;" class="text-primary">&nbsp;评审组&nbsp;</a> -->
+                  <!-- <a href="javascript:;" class="text-secondary">&nbsp;打分模块&nbsp;</a> -->
+                  <!-- <a href="javascript:;" class="text-info">&nbsp;成果模板&nbsp;</a> -->
+                  <a href="javascript:;" class="text-danger" (click)="delete(item.id)">&nbsp;删除&nbsp;</a>
+                </div>
+                <!-- <div class="col-2 col-sm-2 d-none d-sm-block d-lg-none">
+                <a href="javascript:;" (click)="currentTask=item" [matMenuTriggerFor]="menu" #trigger>设置</a>
+              </div>
+              <div class="col-2 d-sm-none p-0">
+                <a href="javascript:;" (click)="closeOpMenu()">设置</a>
+              </div> -->
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-container></ng-container>
+
+        </div>
+
+        <div *ngIf="isAdmin" class="operate-menu-container b-t-t" [ngClass]="{'active': active}">
+          <div class="mask" (click)="closeOpMenu()"></div>
+          <div class="menu-body" *ngIf="active">
+            <!-- <a href="javascript:;" class="operate">评审组</a> -->
+            <!-- <a href="javascript:;" class="operate">打分模块</a> -->
+            <!-- <a href="javascript:;" class="operate">成果模板</a> -->
+            <a href="javascript:;" class="operate" (click)="delete(currentTask?.id)">删除</a>
+            <a href="javascript:;" class="operate" (click)="closeOpMenu()">取消</a>
+          </div>
+        </div>
+
+      </div>
+      <br>
+      <x-ng-libs-bs-pagination [paginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></x-ng-libs-bs-pagination>
+    </div>
+  </div>
+
+</div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>编辑</button>
+  <button mat-menu-item>评审组</button>
+  <button mat-menu-item>打分模块</button>
+  <button mat-menu-item>成果模板</button>
+  <button mat-menu-item>撤回</button>
+</mat-menu>

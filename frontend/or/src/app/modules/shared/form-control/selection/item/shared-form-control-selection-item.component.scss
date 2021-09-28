@@ -1,0 +1,14 @@
+.app-shared-form-control-selection-item {
+  &.sm {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding-top: 1rem;
+
+    .sm-btn {
+      position: absolute;
+      top: -1.5rem;
+      right: 0;
+    }
+  }
+}

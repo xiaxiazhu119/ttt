@@ -1,0 +1,141 @@
+@charset "utf-8";
+
+@import "~x-ng-libs/assets/mixins";
+@import "~x-ng-libs/assets/bundle";
+
+@import "_theme";
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: $gray-base;
+  // font-family:
+  //   /* 1 */
+  //   -apple-system,
+  //   BlinkMacSystemFont,
+  //   /* 2 */
+  //   "Segoe UI",
+  //   "Roboto",
+  //   "Oxygen",
+  //   "Ubuntu",
+  //   "Cantarell",
+  //   "Fira Sans",
+  //   "Droid Sans",
+  //   /* 3 */
+  //   "Helvetica Neue",
+  //   sans-serif;
+}
+
+a {
+  color: $blue-dark;
+
+  &:hover {
+    color: darken($color: $blue-dark, $amount: 10%);
+  }
+}
+
+.more {
+  color: $orange;
+
+  &:hover {
+    color: darken($orange, 3%);
+  }
+}
+
+.hint {
+  color: $gray-lighter;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.sc-container {
+  margin-bottom: 2rem;
+
+  .row {
+    // align-items: center;
+    align-items: baseline;
+  }
+
+  .mat-form-field {
+    width: 100%;
+  }
+}
+
+.create-icon-btn {
+  position: absolute !important;
+  z-index: 2;
+  top: -1rem;
+  right: 0;
+  i {
+    font-size: 3rem;
+  }
+
+  &.r-b {
+    position: fixed !important;
+    top: auto;
+    right: 2rem;
+    bottom: 6rem;
+  }
+}
+
+.create-btn {
+  &.mat-button-base {
+    i {
+      top: 0;
+    }
+  }
+  &.sm {
+    position: fixed;
+    right: 1rem;
+    bottom: 6rem;
+    z-index: 2;
+  }
+}
+
+.clear-input-btn {
+  i {
+    right: 1rem;
+    font-size: 2rem;
+  }
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.component-title {
+  position: relative;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  font-weight: $font-weight-bold;
+  line-height: 1.1;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    // float: left;
+    width: 0.4rem;
+    height: 100%;
+    // margin-right: 0.8rem;
+    background: $app-color-primary;
+  }
+}
+
+.x-ng-libs-pagination-container {
+  position: relative;
+  z-index: 1;
+}

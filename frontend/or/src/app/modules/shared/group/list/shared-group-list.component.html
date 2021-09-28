@@ -1,0 +1,48 @@
+<div class="group-list">
+
+  <div *ngIf="hasSC">
+    <app-base-sc [keywordPlaceholder]="'名称'" [sc]="sc" [hasCreate]="isAdmin" (searchClicked)="search()" (createClicked)="goToCreate()"></app-base-sc>
+  </div>
+
+  <div class="data-container">
+    <p xngDataLoading [isLoading]="dataLoading"></p>
+    <p xngDataNotFound [count]="list.length"></p>
+    <div *ngIf="list.length > 0" class="data-container">
+
+      <div class="data-list data-list-striped container-fluid" [ngClass]="{'compact' : isSM}">
+        <div class="data-header-row data-row row">
+          <div class="col-1" *ngIf="hasRadio"></div>
+          <div class="col-6 col-md-4">名称</div>
+          <div class="col-md-3 d-none d-md-block">组长</div>
+          <div class="col-2 text-center p-0">人数</div>
+          <!-- <div class="col-4 col-md-3" *ngIf="hasOperation"></div> -->
+        </div>
+        <div class="data-item-row data-row row" *ngFor="let item of list">
+          <div class="col-1" *ngIf="hasRadio">
+            <mat-radio-button color="primary" (change)="onRadioChange($event, item)" [value]="item.id" [name]="'g-l'"></mat-radio-button>
+          </div>
+          <div class="col-6 col-md-4">{{item.name}}</div>
+          <div class="col-md-3 d-none d-md-block">{{item.leaderName}}</div>
+          <div class="col-2 text-center p-0">{{item.cnt || 0}}</div>
+          <ng-container *ngIf="hasOperation">
+            <div class="col-md-3 d-none d-md-block">
+              <button mat-button color="primary" (click)="goToEdit(item.id)">编辑</button>
+              &nbsp;
+              <button mat-button color="accent" (click)="delete(item.id)">删除</button>
+            </div>
+            <div class="col-4 d-md-none text-center">
+              <a href="javascript:;" class="text-primary" (click)="goToEdit(item.id)">编辑</a>&nbsp;&nbsp;
+              <a href="javascript:;" class="text-danger" (click)="delete(item.id)">删除</a>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+
+      <br>
+      <x-ng-libs-bs-pagination [paginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></x-ng-libs-bs-pagination>
+
+    </div>
+  </div>
+
+</div>

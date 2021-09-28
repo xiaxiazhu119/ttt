@@ -1,0 +1,44 @@
+<div class="score-item-edit-form container-fluid" [ngClass]="{'in-dialog': inDialog}">
+  <div *ngIf="pageTitle" class="row">
+    <p>&nbsp;</p>
+    <h2 class="col-12 title strong">{{pageTitle}}</h2>
+  </div>
+  <div class="row">
+    <div class="col-12" [ngClass]="{'col-md-4': !inDialog}">
+      <mat-form-field class="full-width">
+        <mat-label><span class="required strong">*</span>名称</mat-label>
+        <input matInput type="text" placeholder="请填写名称" maxlength="20" [(ngModel)]="item.name">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12" [ngClass]="{'col-md-4': !inDialog}">
+      <mat-form-field class="full-width">
+        <mat-label>备注</mat-label>
+        <input matInput type="text" placeholder="请填写备注" maxlength="100" [(ngModel)]="item.remark">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6" [ngClass]="{'col-md-2': !inDialog}">
+      <mat-form-field class="full-width">
+        <mat-label><span class="required strong">*</span>最小分值</mat-label>
+        <input matInput type="number" placeholder="请填写最小分值" [(ngModel)]="item.minValue">
+      </mat-form-field>
+    </div>
+    <div class="col-6" [ngClass]="{'col-md-2': !inDialog}">
+      <mat-form-field class="full-width">
+        <mat-label><span class="required strong">*</span>最大分值</mat-label>
+        <input matInput type="number" placeholder="请填写最大分值" [(ngModel)]="item.maxValue">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12" [ngClass]="{'text-center':!standalone || ltLG}">
+      <button mat-raised-button color="primary" [disabled]="submitted || !item.name || item.minValue === undefined || !item.maxValue" (click)="submit()">确定</button>
+      &nbsp;&nbsp;
+      <button *ngIf="!standalone" mat-button (click)="cancel()">取消</button>
+    </div>
+  </div>
+  <br>
+</div>

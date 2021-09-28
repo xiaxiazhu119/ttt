@@ -1,0 +1,39 @@
+<div class="shared-user-info-form container-fluid">
+  <br>
+  <div class="row">
+    <label for="" class="col-3 col-sm-2 col-xl-1 strong">用户名：</label>
+    <div class="col">{{up.userName}}</div>
+  </div>
+  <div class="row">
+    <label for="" class="col-3 col-sm-2 col-xl-1 strong">姓名：</label>
+    <div class="col-9 col-sm-4 col-xl-3">{{profile.name}}</div>
+    <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">联系方式：</label>
+    <div class="col-9 col-sm-4 col-xl-3">{{profile.mobile}}</div>
+    <label for="" class="col-3 col-sm-2 col-xl-1 strong">机构：</label>
+    <div class="col-9 col-sm-4 col-xl-3">{{profile.orgName}}</div>
+    <label for="" class="col-3 col-sm-2 col-xl-1 strong">岗位：</label>
+    <div class="col-9 col-sm-4 col-xl-3">{{profile.position}}</div>
+    <label for="" class="col-3 col-sm-2 col-xl-1 strong">职务：</label>
+    <div class="col-9 col-sm-4 col-xl-3">{{profile.job}}</div>
+    <label for="" class="col-3 col-sm-2 col-xl-1 strong">职称：</label>
+    <div class="col-9 col-sm-4 col-xl-3">{{profile.title}}</div>
+  </div>
+  <div class="row">
+    <label for="" class="col-3 col-sm-2 col-xl-1 strong">领域：</label>
+    <div class="col container-fluid">
+      <div class="row">
+        <span *ngFor="let item of fields" class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1 field-item">{{item.value}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="isAdmin || isSelf">
+    <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">财务信息：</label>
+    <div class="col">
+      <ul>
+        <li *ngFor="let item of finances; let i = index">{{item.account}}({{item.accountExt}})</li>
+      </ul>
+    </div>
+  </div>
+
+
+</div>

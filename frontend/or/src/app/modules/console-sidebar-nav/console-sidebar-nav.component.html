@@ -1,0 +1,47 @@
+<div id="console-sidebar-nav-container-gt-md" class="d-none d-lg-block">
+  <ul>
+    <li class="nav-item">
+      <a href="/">
+        <i class="icon material-icons">home</i>
+        <br>
+        Home
+      </a>
+    </li>
+    <li class="nav-item" *ngFor="let item of navList">
+      <a href="javascript:;" [ngClass]="{'activated' : item.activated}" (click)="goTo(item)">
+        <i class="material-icons arrow">arrow_left</i>
+        <i *ngIf="item.icon" class="icon {{item.icon.provider}}">{{item.icon.action}}</i>
+        <br>
+        {{item.title}}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div id="console-sidebar-nav-container-lt-lg" class="d-lg-none">
+
+  <div id="console-sidebar-nav-container-lt-lg-body">
+    <a *ngIf="hasBack" href="javascript:;" class="back" (click)="back()"><i class="material-icons">arrow_back</i></a>
+    <h3 class="text-center title">{{ltLgTitle}}</h3>
+    <a href="javascript:;" class="menu" (click)="toggleMenu()">
+      <i class="material-icons">menu</i>
+    </a>
+
+  </div>
+
+</div>
+
+<div id="" class="fixed-slide-rtl-selection-container" [@slideRtLAnimation]="animationState">
+  <div class="mask" (click)="toggleMenu()"></div>
+  <div *ngIf="this.animationState" class="s-c-c">
+    <a href="javascript:;" (click)="toggleMenu()"><i class="material-icons">close</i></a>
+    <ul id="s-c-c-list">
+      <li class="nav-item-lt-lg">
+        <a href="/">Home</a>
+      </li>
+      <li class="nav-item-lt-lg" *ngFor="let item of navList">
+        <a href="javascript:;" [ngClass]="{'activated' : item.activated}" (click)="goTo(item)">{{item.title}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

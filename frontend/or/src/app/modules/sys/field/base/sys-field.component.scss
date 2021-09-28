@@ -1,0 +1,21 @@
+.field-item {
+  line-height: 1.5;
+  span {
+    display: none;
+    line-height: 1.5;
+  }
+
+  &:hover {
+    span {
+      display: block;
+    }
+  }
+}
+
+// .title {
+//   position: relative;
+//   .create-btn-container {
+//     position: absolute;
+//     left: 20rem;
+//   }
+// }

@@ -1,0 +1,24 @@
+@import "~x-ng-libs/assets/mixins";
+
+#organization-user-container {
+  min-height: 20rem;
+  // .create-btn {
+  //   position: absolute;
+  //   right: 0;
+  //   i {
+  //     font-size: 3rem;
+  //   }
+
+  //   &.lg {
+  //     position: fixed;
+  //     right: 2rem;
+  //     bottom: 2rem;
+  //   }
+  // }
+
+  #edit-container {
+    height: 0;
+    overflow: hidden;
+    @include slide-down;
+  }
+}

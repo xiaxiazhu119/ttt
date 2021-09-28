@@ -1,0 +1,58 @@
+<div class="shared-score-item-list">
+  <div class="data-container">
+    <p xngDataLoading [isLoading]="dataLoading"></p>
+    <p xngDataNotFound [count]="list.length"></p>
+    <div *ngIf="list.length > 0" class="data-container">
+      <div class="data-list data-list-striped container-fluid" [ngClass]="{'compact' : isSM}">
+        <div class="data-header-row data-row row">
+          <div class="col-1" *ngIf="hasCheckbox">
+          </div>
+          <div class="col-6 col-md-3">名称</div>
+          <div class="col-3 d-none d-md-block">描述</div>
+          <div class="col-3">分值</div>
+          <div class="col-3" *ngIf="hasScoreInput">分数</div>
+        </div>
+        <div class="data-item-row data-row row" *ngFor="let item of list">
+          <div class="col-1" *ngIf="hasCheckbox">
+            <mat-checkbox color="primary" [(ngModel)]="item.selected" (change)="onItemCheck($event, item)"></mat-checkbox>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="javascript:;" *ngIf="hasFieldColumnLink" (click)="goToView(item.id)">{{item.name}}</a>
+            <span *ngIf="!hasFieldColumnLink">{{item.name}}</span>
+          </div>
+          <div class="col-3 d-none d-md-block">{{item.remark}}</div>
+          <div class="col-3">{{item.minValue}} ~ {{item.maxValue}}</div>
+          <ng-container *ngIf="hasOperation">
+            <div class="col-md-3 d-none d-md-block">
+              <button mat-button color="primary" (click)="goToEdit(item)">编辑</button>
+              &nbsp;
+              <button mat-button color="accent" (click)="delete(item.id)">删除</button>
+            </div>
+            <div class="col-3 d-md-none text-center">
+              <a href="javascript:;" class="text-primary" (click)="goToEdit(item)">编辑</a>&nbsp;&nbsp;
+              <a href="javascript:;" class="text-danger" (click)="delete(item.id)">删除</a>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="hasScoreInput">
+            <div class="col-3">
+              <mat-form-field *ngIf="!scoreInputDisabled" class="full-width">
+                <mat-label>分数</mat-label>
+                <input matInput type="number" class="score-value" placeholder="请填写分数" min="{{item.minValue}}" max="{{item.maxValue}}" [(ngModel)]="item.value">
+              </mat-form-field>
+              <span class="" *ngIf="scoreInputDisabled">{{item.value}}</span>
+            </div>
+          </ng-container>
+        </div>
+        <div *ngIf="hasTotalFooter" class="data-footer-row data-row row">
+          <div class="col-9">总分</div>
+          <div class="col-3" id="total-score">{{totalScore}}</div>
+          <!-- <div class="col-3" *ngIf="hasScoreInput"></div> -->
+        </div>
+
+
+      </div>
+      <br>
+      <!-- <x-ng-libs-bs-pagination [paginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></x-ng-libs-bs-pagination> -->
+    </div>
+  </div>
+</div>

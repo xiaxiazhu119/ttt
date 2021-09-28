@@ -1,0 +1,26 @@
+<div id="console-review-edit">
+
+  <app-shared-result-view [id]="resultId" [rv]="result"></app-shared-result-view>
+
+  <br>
+
+  <h3 class="strong">评审项目</h3>
+  <app-shared-score-item-list [taskId]="taskId" [hasFieldColumnLink]="false" [hasOperation]="false" [hasScoreInput]="true" [hasTotalFooter]="true" [totalScore]="review.totalScore" (dataLoaded)="onScoreItemsLoaded($event)"></app-shared-score-item-list>
+
+  <p>
+    <mat-form-field class="full-width">
+      <mat-label>评审意见</mat-label>
+      <textarea matInput placeholder="评审意见" name="" id="" cols="30" rows="4" [(ngModel)]="review.opinion"></textarea>
+    </mat-form-field>
+  </p>
+
+  <p class="text-center text-danger">
+    &nbsp;{{msg}}&nbsp;
+  </p>
+
+  <p [ngClass]="{'text-center': ltLG}">
+    <button mat-raised-button color="primary" [disabled]="submitted" (click)="submit()">确定</button>
+  </p>
+
+
+</div>

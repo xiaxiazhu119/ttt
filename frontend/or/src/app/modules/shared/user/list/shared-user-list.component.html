@@ -1,0 +1,75 @@
+<div *ngIf="!orgId">
+  <app-base-sc [keywordPlaceholder]="'姓名/联系方式'" [sc]="sc" [hasCreate]="isAdmin" (searchClicked)="search()" (createClicked)="goToCreate()"></app-base-sc>
+</div>
+
+
+<p xngDataLoading [isLoading]="dataLoading"></p>
+
+<br *ngIf="windowSize!=='sm'">
+
+<p xngDataNotFound [count]="list.length"></p>
+<div *ngIf="list.length > 0" class="data-container">
+  <div class="data-list data-list-striped container-fluid row-slide-menu" [ngClass]="{'compact' : isSM}">
+    <div class="data-header-row data-row row">
+      <ng-container *ngIf="orgId">
+        <div class="col-6 col-sm-5">用户名</div>
+      </ng-container>
+      <ng-container *ngIf="!orgId">
+        <div class="col-4 col-sm-3 col-md-2">姓名</div>
+        <div class="col-4 col-sm-3 col-md-2">联系方式</div>
+        <div class="col-sm-3 d-none d-sm-block">机构</div>
+      </ng-container>
+      <ng-container *ngIf="isAdmin">
+        <div class="col-2 col-sm-1 col-md-1 p-0 text-center">状态</div>
+      </ng-container>
+      <!-- <div class="col-2 col-sm-3"></div> -->
+    </div>
+    <div class="data-item-row data-row row" *ngFor="let item of list">
+      <ng-container *ngIf="orgId">
+        <div class="col-6 col-sm-5">{{item.userName}}</div>
+      </ng-container>
+      <ng-container *ngIf="!orgId">
+        <div class="col-4 col-sm-3 col-md-2">
+          <a href="javascript:;" (click)="goToView(item.id)">{{item.name}}</a>
+        </div>
+        <div class="col-4 col-sm-3 col-md-2">{{item.mobile}}</div>
+        <div class="col-sm-3 d-none d-sm-block">{{item.orgName}}</div>
+      </ng-container>
+      <ng-container *ngIf="isAdmin">
+        <div class="col-2 col-sm-1 col-md-1 slide-success-theme p-0 text-center">
+          <mat-slide-toggle [checked]="item.enabled" (change)="switch($event, item.id)"></mat-slide-toggle>
+        </div>
+        <div class="col-md-4 d-none d-md-block p-0">
+          <button mat-button color="primary" (click)="goToEdit(item.id)" [hidden]="orgId">编辑</button>
+          <button mat-button color="primary" (click)="resetPwd(item.id)">重置密码</button>
+          <button mat-button color="accent" (click)="delete(item.id)">删除</button>
+        </div>
+        <div class="col-2 d-md-none text-center p-0">
+          <a href="javascript:;" (click)="item.active=!item.active">设置</a>
+          <!-- <a href="javascript:;" class="text-info">停用</a>
+        &nbsp; -->
+        </div>
+        <div class="operate-menu-container r-t-l" [ngClass]="{'active': item.active}">
+          <div class="menu-body" [ngClass]="{'justify-content-end': orgId}">
+            <a href="javascript:;" class="btn btn-primary" (click)="goToEdit(item.id)" [hidden]="orgId">编辑</a>
+            <a href="javascript:;" class="btn btn-primary" (click)="resetPwd(item.id)">重置密码</a>
+            <a href="javascript:;" class="btn btn-danger" (click)="delete(item.id)">删除</a>
+            <a href="javascript:;" class="btn btn-secondary" (click)="item.active=!item.active">取消</a>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!isAdmin">
+        <div class="col-2">
+          <a href="javascript:;" (click)="goToView(item.id)">查看</a>
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+  <br>
+  <x-ng-libs-bs-pagination [paginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></x-ng-libs-bs-pagination>
+</div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>权限 1</button>
+  <button mat-menu-item>权限 2</button>
+</mat-menu>

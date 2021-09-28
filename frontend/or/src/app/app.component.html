@@ -1,0 +1,14 @@
+<div class="progressbar-container" [hidden]="!showProgress">
+  <ng-progress #progressBar [fixed]="false"></ng-progress>
+</div>
+
+<div [hidden]="h" id="app-container" class="app-theme">
+  <!-- <div [ngClass]="{'fade-in' : componentLoaded}"> -->
+  <router-outlet></router-outlet>
+  <!-- </div> -->
+
+  <a [hidden]="!showReturnToTop" (click)="scrollToTop()" mat-fab color="primary" class="return-to-top">
+    <i class="material-icons">arrow_upward</i>
+  </a>
+
+</div>

@@ -1,0 +1,29 @@
+@import "~x-ng-libs/assets/mixins";
+@import "_theme";
+
+#expert-list-for-sm {
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  @include slide-RtL(0.3s);
+
+  #elt {
+    height: 5rem;
+    padding-top: 1.5rem;
+    background: $app-color-primary;
+    text-align: center;
+    color: #fff;
+    .back {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.5rem;
+      color: #fff;
+      i {
+        font-size: 3rem;
+      }
+    }
+  }
+}

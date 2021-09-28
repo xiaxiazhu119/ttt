@@ -1,0 +1,58 @@
+<div class="shared-result-view">
+
+
+  <div class="container-fluid">
+    <br>
+
+    <div class="row result-row" *ngFor="let item of controls">
+
+      <label class="col-3 col-sm-2 col-xl-1 strong pr-0">
+        {{item.name}}
+      </label>
+      <div class="col">
+        <ng-container [ngSwitch]="item.type">
+
+          <ng-container *ngSwitchCase="formCtrlEnum.Input">
+            {{item.value}}
+          </ng-container>
+
+          <ng-container *ngSwitchCase="formCtrlEnum.TextArea">
+            <pre>{{item.value}}</pre>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="formCtrlEnum.Image">
+            <a class="preview-img" [href]="item.value.fullPath" target="_blank">
+              <img [src]="item.value.fullPath" alt="">
+            </a>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="formCtrlEnum.Attachment">
+            <a [href]="item.value.fullPath" target="_blank">{{item.value.fileName}}</a>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="formCtrlEnum.Url">
+            <a [href]="item.value.value" target="_blank">{{item.value.key}}</a>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault></ng-container>
+
+        </ng-container>
+
+      </div>
+
+    </div>
+
+    <ng-container *ngIf="rv">
+      <div class="row">
+        <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">提交时间：</label>
+        <div class="col">{{rv.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
+      </div>
+    </ng-container>
+    <br>
+
+
+
+  </div>
+
+
+</div>

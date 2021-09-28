@@ -1,0 +1,33 @@
+@import "~x-ng-libs/assets/mixins";
+@import "_theme";
+
+#app-container {
+  height: 100%;
+  overflow: hidden;
+  // @include fade-in();
+  // > div {
+  //   height: 100%;
+  //   // @include fade-in();
+  // }
+
+  // .component-loading-anime {
+  //   @include fade-out();
+
+  //   > div {
+  //     padding: 100px 0;
+  //   }
+  // }
+
+  .return-to-top {
+    position: fixed;
+    z-index: 3;
+    right: 1rem;
+    bottom: 1rem;
+    width: 4rem;
+    height: 4rem;
+    .mat-button-wrapper {
+      padding: 0;
+      line-height: 4rem;
+    }
+  }
+}

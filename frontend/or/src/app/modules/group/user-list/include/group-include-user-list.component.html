@@ -1,0 +1,36 @@
+<div class="group-include-user-list">
+  <div class="data-container">
+    <p xngDataLoading [isLoading]="dataLoading"></p>
+    <p xngDataNotFound [count]="users?.length || 0"></p>
+    <div *ngIf="users?.length > 0" class="data-list data-list-striped container-fluid">
+      <div class="data-header-row data-row row">
+        <div class="{{hasOperation ? 'col-4' : 'col-6'}}">姓名</div>
+        <div class="col-md-2 d-none d-md-block">身份</div>
+        <div class="col-4 col-md-3">联系方式</div>
+      </div>
+      <div class="data-item-row data-row row" *ngFor="let item of users">
+        <div class="{{hasOperation ? 'col-4' : 'col-6'}}">{{item.name}}
+          <span class="leader text-success" *ngIf="item.isLeader">
+            <i class="material-icons">military_tech</i>
+          </span>
+        </div>
+        <div class="col-md-2 d-none d-md-block" [ngClass]="{'text-success':item.isLeader}">{{item.isLeader ? '组长' : '组员'}}</div>
+        <div class="col-4 col-md-3">{{item.mobile}}</div>
+
+        <ng-container *ngIf="hasOperation">
+          <div class="col-md-3 d-none d-md-block p-0">
+            <button mat-button color="primary" (click)="switchAuthor(item)">设为{{item.isLeader ? '组员' : '组长'}}</button>
+            &nbsp;
+            <button mat-button color="accent" (click)="delete(item)">移除</button>
+          </div>
+          <div class="col-4 d-md-none text-center p-0">
+            <a href="javascript:;" class="text-primary" (click)="switchAuthor(item)">设为{{item.isLeader ? '组员' : '组长'}}</a>&nbsp;&nbsp;
+            <a href="javascript:;" class="text-danger" (click)="delete(item)">移除</a>
+          </div>
+        </ng-container>
+
+      </div>
+
+    </div>
+  </div>
+</div>

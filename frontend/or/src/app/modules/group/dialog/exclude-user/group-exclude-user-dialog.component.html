@@ -1,0 +1,21 @@
+<div class="mat-dialog-container-lg-x">
+  <a href="javascript:;" (click)="cancel()" class="close">&times;</a>
+
+  <br>
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <app-group-exclude-user-list [id]="data.id" [users]="data.users" (userChanged)="onUserChange($event)"></app-group-exclude-user-list>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-12 text-center">
+        <button mat-raised-button color="primary" type="button" [disabled]="!selected || submitted" (click)="confirm()">确定</button>
+        &nbsp;&nbsp;
+        <button mat-button type="button" (click)="cancel()">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>

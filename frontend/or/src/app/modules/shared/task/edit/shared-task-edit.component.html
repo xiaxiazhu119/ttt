@@ -1,0 +1,113 @@
+<div class="shared-task-edit">
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <mat-form-field class="full-width">
+          <mat-label><span class="required strong">*</span>任务名称</mat-label>
+          <input matInput type="text" placeholder="请填写任务名称" maxlength="50" [(ngModel)]="task.name">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-4">
+
+        <x-ng-libs-bs-date-picker [formFieldClass]="'full-width'" [labelTxt]="'征集日期'" [isRequired]="true" [placeholder]="'选择征集日期区间'" [useRange]="true" [config]="levyDateBsConfig" [value]="task.levyDateRange" (valueChanged)="onLevyDateChange($event)"></x-ng-libs-bs-date-picker>
+
+      </div>
+      <div class="col-12 col-md-4">
+
+        <x-ng-libs-bs-date-picker [formFieldClass]="'full-width'" [labelTxt]="'评审日期'" [isRequired]="true" [placeholder]="'选择评审日期区间'" [useRange]="true" [config]="reviewDateBsConfig" [value]="task.reviewDateRange" [disabled]="reviewDateDisabled" (valueChanged)="onReviewDateChange($event)"></x-ng-libs-bs-date-picker>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <mat-form-field class="full-width">
+          <mat-label><span class="required strong">*</span>任务模式</mat-label>
+          <mat-select [(ngModel)]="task.taskMode" placeholder="任务模式">
+            <mat-option *ngFor="let item of taskModeList" [value]="item.key">{{item.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- <div class="col-12 col-md-4">
+        <mat-form-field class="full-width">
+          <mat-label><span class="required strong">*</span>征集范围</mat-label>
+          <mat-select [(ngModel)]="task.scope" placeholder="征集范围">
+            <mat-option *ngFor="let item of levyScopeList" [value]="item.key">{{item.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> -->
+      <div class="col-12 col-md-6">
+        <mat-form-field class="full-width">
+          <mat-label><span class="required strong">*</span>评审模式</mat-label>
+          <mat-select [(ngModel)]="task.reviewMode" placeholder="评审模式">
+            <mat-option *ngFor="let item of reviewModeList" [value]="item.key">{{item.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-3 col-sm-2 col-md-2"><span class="required strong">*</span>评审组</div>
+      <div class="col-auto" *ngIf="task.groupNames">
+        {{task.groupNames}}
+      </div>
+      <div class="col">
+        <app-group-list-dialog-btn class="d-none d-md-block" [btnTxt]="task.groups?.length > 0 ? '重新选择评审组' : '选择评审组'" (dialogConfirmed)="onGroupSelect($event)"></app-group-list-dialog-btn>
+        <a href="javascript:;" class="d-md-none" (click)="glbttActive = !glbttActive">{{task.groups?.length > 0 ? '重新选择评审组' : '选择评审组'}}</a>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field class="full-width">
+          <mat-label>任务简介</mat-label>
+          <textarea matInput placeholder="任务简介" name="" id="" cols="30" rows="4" [(ngModel)]="task.description"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <h3 class="strong">打分项目</h3>
+
+    <app-shared-score-item-list [hasCheckbox]="true" [hasFieldColumnLink]="false" [hasOperation]="false" [selectedItems]="task.scoreItems" (checkboxItemChecked)="onScoreItemChecked($event)"></app-shared-score-item-list>
+
+    <h3 class="strong">成果模板</h3>
+
+    <app-shared-result-template-list [hasSC]="false" [hasRadio]="true" [hasFieldColumnLink]="false" [hasOperation]="false" [selectedItems]="task.resultTemplate ? [task.resultTemplate] : []" (radioItemChanged)="onResultTemplateChanged($event)"></app-shared-result-template-list>
+
+    <p class="text-center text-danger">&nbsp;{{msg}}&nbsp;</p>
+    <div class="row">
+      <div class="col" [ngClass]="{'text-center': ltLG}">
+        <button mat-raised-button color="primary" (click)="submit()">确定</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="user-group-select-container" [ngClass]="{'active': glbttActive}">
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <h3 class="col-12 strong">选择评审组</h3>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <app-shared-group-list [hasSC]="false" [hasOperation]="false" (radioItemChanged)="onSlideGroupSelect($event)"></app-shared-group-list>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-12 text-center">
+        <button mat-raised-button color="primary" (click)="confirmGLBTT()">确定</button>
+        &nbsp;&nbsp;
+        <button mat-button (click)="cancelGLBTT()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

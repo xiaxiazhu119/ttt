@@ -1,0 +1,29 @@
+<div class="base-sc-container">
+
+  <div class="sc-container container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4">
+        <mat-form-field>
+          <mat-label>关键词</mat-label>
+          <input matInput type="text" placeholder="{{keywordPlaceholder}}" maxlength="20" [(ngModel)]="sc.keyword">
+          <button mat-button *ngIf="sc?.keyword && sc?.keyword.trim()" class="clear-input-btn" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+            <i class="material-icons">close</i>
+          </button>
+          <button mat-button class="d-md-none" matSuffix mat-icon-button (click)="search()">
+            <i class="material-icons">search</i>
+          </button>
+        </mat-form-field>
+        <button *ngIf="hasCreate" mat-mini-fab color="primary" type="button" class="create-btn sm d-md-none" (click)="goToCreate()">
+          <i class="material-icons">add</i>
+        </button>
+      </div>
+      <div class="col-md-6 d-none d-md-block">
+        <button mat-raised-button color="primary" type="button" (click)="search()"><i class="material-icons">search</i> 检索</button>
+        &nbsp;&nbsp;
+        <button *ngIf="hasCreate" mat-raised-button color="primary" type="button" (click)="goToCreate()"><i class="material-icons">add</i> 新建</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,39 @@
+<div class="shared-result-list">
+
+  <h3 class="strong" *ngIf="!standalone">成果列表</h3>
+  <div class="data-container">
+    <p xngDataLoading [isLoading]="dataLoading"></p>
+    <p xngDataNotFound [count]="list.length"></p>
+    <div *ngIf="list.length > 0" class="data-container">
+      <div class="data-list data-list-striped container-fluid" [ngClass]="{'compact' : isSM}">
+        <div class="data-header-row data-row row">
+          <!-- <div class="col-9 col-sm-5 col-md-4">成果名称</div> -->
+          <div class="col-3 col-md-2">提交人</div>
+          <div class="col-5 col-md-3 p-0">提交时间</div>
+          <!-- <div class="col-2" *ngIf="canReview"></div> -->
+        </div>
+        <div class="data-item-row data-row row" *ngFor="let item of list">
+          <!-- <div class="col-9 col-sm-5 col-md-4">{{item.contents?.name}}</div> -->
+          <!-- <div class="col-md-2 d-none d-md-block">提交人</div> -->
+          <div class="col-3 col-md-2">{{item.name}}</div>
+          <div class="col-5 col-md-3 p-0">{{item.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</div>
+          <div class="col-md-3 d-none d-md-block p-0">
+            <button *ngIf="canReview" mat-button color="primary" (click)="goToEdit(item)">评审</button>
+            <button *ngIf="isLeader" mat-button color="primary" (click)="goToStatistics(item)">统计</button>
+            <button mat-button color="primary" (click)="goToView(item)">查看</button>
+          </div>
+          <div class="col-4 d-md-none p-0">
+            <a *ngIf="canReview" href="javascript:;" class="text-primary" (click)="goToEdit(item)">&nbsp;评审&nbsp;</a>
+            <a *ngIf="isLeader" href="javascript:;" class="text-primary" (click)="goToStatistics(item)">&nbsp;统计&nbsp;</a>
+            <a href="javascript:;" class="text-primary" (click)="goToView(item)">&nbsp;查看&nbsp;</a>
+          </div>
+        </div>
+
+
+      </div>
+      <br>
+      <!-- <x-ng-libs-bs-pagination [paginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></x-ng-libs-bs-pagination> -->
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,6 @@
+@import "_app_mixins";
+
+#score-item-edit-form-container {
+  background: #fff;
+  @include slide-b-t-t(6);
+}

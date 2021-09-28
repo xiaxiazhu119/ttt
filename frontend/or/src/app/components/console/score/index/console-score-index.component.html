@@ -1,0 +1,12 @@
+<div id="console-score-index">
+
+  <mat-tab-group #tabGroup (selectedTabChange)="onSelectedTabChange($event)">
+    <mat-tab label="打分项目">
+      <app-console-score-item-list [tabChange]="tabChange"></app-console-score-item-list>
+    </mat-tab>
+    <!-- <mat-tab label="打分模板">
+      <app-console-score-template [tabChange]="tabChange"></app-console-score-template>
+    </mat-tab> -->
+  </mat-tab-group>
+
+</div>

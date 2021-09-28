@@ -1,0 +1,7 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4 col-sm-3 col-md-2" *ngFor="let item of excludeUsers">
+      <mat-checkbox color="primary" (change)="onUserChange($event, item)" [(ngModel)]="item.activated">{{item.value}}</mat-checkbox>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+@import "~x-ng-libs/assets/mixins";
+
+@import "_theme";
+
+.shared-user-edit-form {
+  background: #fff;
+  padding-top: 2rem;
+
+  &.in-dialog {
+    padding-top: 0;
+  }
+
+  .a-f-c {
+    position: relative;
+
+    .add-finance {
+      position: absolute;
+      top: -1rem;
+      left: 10rem;
+      z-index: 1;
+    }
+  }
+
+  .delete-finance {
+    position: absolute;
+    top: -2rem;
+    right: -1.5rem;
+  }
+
+  // .finance-row {
+  //   &:hover {
+  //     position: relative;
+
+  //     &::before {
+  //       display: block;
+  //       width: 100%;
+  //     }
+  //   }
+
+  //   &::before {
+  //     content: "";
+  //     position: absolute;
+  //     bottom: 0;
+  //     left: 0;
+  //     width: 0;
+  //     height: 1px;
+  //     background: $app-color-primary;
+  //     overflow: hidden;
+
+  //     @include transition(all);
+  //   }
+  // }
+}

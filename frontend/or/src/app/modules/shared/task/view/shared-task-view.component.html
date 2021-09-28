@@ -1,0 +1,40 @@
+<div class="shared-task-view">
+
+
+  <div class="container-fluid">
+    <br>
+    <div class="row">
+      <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">任务名称：</label>
+      <div class="col">{{task.name}}</div>
+    </div>
+    <div class="row">
+      <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">征集日期：</label>
+      <div class="col-9 col-sm-4 col-xl-3">{{task.levyStartDate | date:'yyyy-MM-dd'}} ~ {{task.levyEndDate | date:'yyyy-MM-dd'}}</div>
+      <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">评审日期：</label>
+      <div class="col-9 col-sm-4 col-xl-3">{{task.reviewStartDate | date:'yyyy-MM-dd'}} ~ {{task.reviewEndDate | date:'yyyy-MM-dd'}}</div>
+    </div>
+
+    <div class="row">
+      <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">任务模式：</label>
+      <div class="col-9 col-sm-4 col-md-2 col-xl-3">{{task.taskModeName}}</div>
+      <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">征集范围：</label>
+      <div class="col-9 col-sm-4 col-md-2 col-xl-3">{{task.scopeName}}</div>
+      <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">评审模式：</label>
+      <div class="col-9 col-sm-4 col-md-2 col-xl-3">{{task.reviewModeName}}</div>
+    </div>
+
+    <div class="row">
+      <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">评审组：</label>
+      <div class="col">{{task.groupNames}}</div>
+    </div>
+
+    <div class="row">
+      <label for="" class="col-3 col-sm-2 col-xl-1 strong pr-0">任务简介：</label>
+      <div class="col">{{task.description}}</div>
+    </div>
+
+    <br>
+
+  </div>
+
+</div>

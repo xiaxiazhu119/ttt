@@ -1,0 +1,59 @@
+<div class="passport-form-container container-fluid">
+  <div class="row">
+    <div class="col-10 offset-1 col-md-6 offset-md-3">
+      <div class="form-container container-fluid">
+        <h2 class="title">专家在线评审系统</h2>
+        <div class="row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>用户名</mat-label>
+              <input matInput type="text" placeholder="请输入用户名或手机号" maxlength="20" [(ngModel)]="up.userName">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>密码</mat-label>
+              <input matInput [type]="pwdHide ? 'password' : 'text'" placeholder="请输入密码" maxlength="20" [(ngModel)]="up.pwd">
+              <button mat-icon-button matSuffix (click)="pwdHide = !pwdHide">
+                <i class="material-icons">{{pwdHide ? 'visibility_off' : 'visibility'}}</i>
+              </button>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-shared-image-captcha [ts]="ts" [showRequired]="true" (captchaValueChanged)="onCaptchaValueChanged($event)" (captchaLoaded)="onCaptchaLoaded($event)"></app-shared-image-captcha>
+            <!-- <mat-form-field>
+              <mat-label>验证码</mat-label>
+              <input matInput type="text" placeholder="请输入验证码" maxlength="20" [(ngModel)]="up.captcha">
+              <a matSuffix href="javascript:;" (click)="getImageCaptcha()" *ngIf="imageCaptcha"><img [src]="imageCaptcha" alt=""></a>
+            </mat-form-field> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <!-- <mat-checkbox color="primary">记住我</mat-checkbox> -->
+          </div>
+          <div class="col-6 text-right">
+            <!-- <button class="btn btn-link" type="button">忘记密码</button> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 offset-4">
+            <button mat-raised-button color="primary" class="full-width" type="button" [disabled]="!up.userName || !up.pwd || !up.captcha" (click)="submit()">登录</button>
+          </div>
+        </div>
+        <br>
+        <p class="text-center">
+          没有账号？<a href="javascript:;" (click)="goToSignUp()">注册</a>
+        </p>
+
+        <div class="row">
+          <div class="col text-center text-danger">&nbsp;{{msg}}&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

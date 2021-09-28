@@ -1,0 +1,36 @@
+<div id="console-result-template-edit">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <mat-form-field class="full-width">
+          <mat-label><span class="required strong">*</span>模板名称</mat-label>
+          <input matInput type="text" placeholder="请填写模板名称" maxlength="20" [(ngModel)]="template.name">
+        </mat-form-field>
+      </div>
+    </div>
+    <p>
+
+      <button mat-mini-fab color="primary" type="button" class="create-btn sm d-md-none" (click)="addControl()">
+        <i class="material-icons">add</i>
+      </button>
+      <button mat-raised-button color="primary" type="button" class="d-none d-md-block" (click)="addControl()">添加控件</button>
+
+    </p>
+  </div>
+  <br>
+  <ng-container *ngFor="let item of controls">
+    <app-shared-form-control-selection-item [ctrl]="item" [controls]="controls"></app-shared-form-control-selection-item>
+    <br>
+
+  </ng-container>
+
+  <p class="text-center text-danger">
+    &nbsp;{{msg}}&nbsp;
+  </p>
+
+  <p *ngIf="controls.length > 0" class="pl-4" [ngClass]="{'text-center': ltLG}">
+    <button mat-raised-button color="primary" type="button" [disabled]="!template.name" (click)="save()">保存</button>
+  </p>
+
+</div>

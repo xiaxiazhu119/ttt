@@ -1,0 +1,35 @@
+<div class="organization-edit">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <mat-form-field class="full-width">
+          <mat-label>机构名称</mat-label>
+          <input matInput type="text" placeholder="机构名称" maxlength="20" [(ngModel)]="org.name">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <mat-form-field class="full-width">
+          <mat-label>联系人</mat-label>
+          <input matInput type="text" placeholder="联系人" maxlength="20" [(ngModel)]="org.contact">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <mat-form-field class="full-width">
+          <mat-label>联系方式</mat-label>
+          <input matInput type="text" placeholder="联系方式" maxlength="20" [(ngModel)]="org.tel">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-4" [ngClass]="{'text-center': ltMD}">
+        <button mat-raised-button color="primary" [disabled]="submitted || !org.name" (click)="submit()">确定</button>
+        &nbsp;&nbsp;
+        <!-- <button mat-button (click)="cancel()">取消</button> -->
+      </div>
+    </div>
+  </div>
+</div>

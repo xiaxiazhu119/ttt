@@ -1,0 +1,164 @@
+<div class="shared-user-edit-form container-fluid" [ngClass]="{'in-dialog': inDialog}">
+  <div *ngIf="pageTitle" class="row">
+    <h2 class="col-12 title strong">{{pageTitle}}</h2>
+  </div>
+  <div class="row">
+
+    <div class="col-12" [ngClass]="{'col-md-4': !inDialog}">
+      <mat-form-field class="full-width">
+        <mat-label><span class="required strong">*</span>用户名</mat-label>
+        <input matInput type="text" placeholder="请填写用户名或手机号" maxlength="20" [(ngModel)]="up.userName" [disabled]="id">
+      </mat-form-field>
+    </div>
+    <div *ngIf="!id" class="col-12" [ngClass]="{'col-md-4': !inDialog}">
+      <mat-form-field class="full-width">
+        <mat-label><span class="required strong">*</span>密码</mat-label>
+        <input matInput [type]="pwdHide ? 'password' : 'text'" placeholder="请输入密码" maxlength="20" [(ngModel)]="pwd">
+        <button mat-icon-button matSuffix (click)="pwdHide = !pwdHide">
+          <i class="material-icons">{{pwdHide ? 'visibility_off' : 'visibility'}}</i>
+        </button>
+      </mat-form-field>
+    </div>
+    <div *ngIf="!id" class="col-12" [ngClass]="{'col-md-4': !inDialog}">
+      <mat-form-field class="full-width">
+        <mat-label><span class="required strong">*</span>确定密码</mat-label>
+        <input matInput [type]="pwdHide ? 'password' : 'text'" placeholder="请输入密码" maxlength="20" [(ngModel)]="confirmPwd">
+        <button mat-icon-button matSuffix (click)="confirmPwdHide = !confirmPwdHide">
+          <i class="material-icons">{{confirmPwdHide ? 'visibility_off' : 'visibility'}}</i>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+
+
+  <!-- <div class="row">
+        <div class="col-12 py-3">
+          <mat-radio-group color="primary" [(ngModel)]="up.role">
+            <mat-radio-button [value]="roleEnum.Normal">用户</mat-radio-button>
+            <mat-radio-button [value]="roleEnum.Admin">管理员</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div> -->
+
+
+  <ng-container *ngIf="!orgId">
+
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="full-width">
+          <mat-label>专家姓名</mat-label>
+          <input matInput type="text" placeholder="专家姓名" maxlength="20" [(ngModel)]="profile.name">
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="full-width">
+          <mat-label>联系方式</mat-label>
+          <input matInput type="text" placeholder="联系方式" maxlength="20" [(ngModel)]="profile.mobile">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <mat-form-field class="full-width">
+          <mat-select [(ngModel)]="profile.orgId" placeholder="选择机构">
+            <!-- <mat-option [value]="undefined">全部</mat-option> -->
+            <mat-option *ngFor="let item of orgList" [value]="item.key">{{item.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-6 col-md-4">
+        <mat-form-field class="full-width">
+          <mat-label>岗位</mat-label>
+          <input matInput type="text" placeholder="岗位" maxlength="20" [(ngModel)]="profile.position">
+        </mat-form-field>
+      </div>
+      <div class="col-6 col-md-4">
+        <mat-form-field class="full-width">
+          <mat-label>职务</mat-label>
+          <input matInput type="text" placeholder="岗位" maxlength="20" [(ngModel)]="profile.job">
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-md-4">
+        <mat-form-field class="full-width">
+          <mat-label>职称</mat-label>
+          <input matInput type="text" placeholder="职称" maxlength="20" [(ngModel)]="profile.title">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field class="full-width">
+          <mat-label>备注</mat-label>
+          <textarea matInput placeholder="备注" name="" id="" cols="30" rows="4" [(ngModel)]="profile.remark"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-label>领域</mat-label>
+      </div>
+    </div>
+    <div class="row">
+      <span *ngFor="let item of fields" class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1 field-item">
+        <mat-checkbox color="primary" [(ngModel)]="item.activated">{{item.value}}</mat-checkbox>
+      </span>
+    </div>
+    <br>
+    <div class="row a-f-c">
+      <h3 class="col-12 strong">财务信息</h3>
+      <button mat-mini-fab color="primary" type="button" class="create-btn add-finance sm" (click)="addFinance()">
+        <i class="material-icons">add</i>
+      </button>
+    </div>
+    <br>
+    <div class="row finance-row align-items-baseline" *ngFor="let item of finances; let i = index">
+      <div class="col-12 d-md-none">
+        <div class="card">
+          <button mat-mini-fab color="primary" type="button" class="delete-finance" (click)="deleteFinance(item.id, i)">
+            <i class="material-icons">clear</i>
+          </button>
+          <div class="card-body">
+            <p>
+              <mat-form-field class="full-width">
+                <mat-label>开户银行</mat-label>
+                <input matInput type="text" placeholder="开户银行" maxlength="30" [(ngModel)]="item.account">
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field class="full-width">
+                <mat-label>银行卡号</mat-label>
+                <input matInput type="text" placeholder="银行卡号" maxlength="20" [(ngModel)]="item.accountExt">
+              </mat-form-field>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div>
+      <div class="col-md-5 d-none d-md-block">
+        <mat-form-field class="full-width">
+          <mat-label>开户银行</mat-label>
+          <input matInput type="text" placeholder="开户银行" maxlength="30" [(ngModel)]="item.account">
+        </mat-form-field>
+      </div>
+      <div class="col-md-5 d-none d-md-block">
+        <mat-form-field class="full-width">
+          <mat-label>银行卡号</mat-label>
+          <input matInput type="text" placeholder="银行卡号" maxlength="20" [(ngModel)]="item.accountExt">
+        </mat-form-field>
+      </div>
+      <div class="col-md-2 d-none d-md-block">
+        <a href="javascript:;" (click)="deleteFinance(item.id, i)">删除</a>
+      </div>
+    </div>
+    <br>
+  </ng-container>
+  <div class="row">
+    <div class="col-12" [ngClass]="{'text-center':!standalone || ltLG}">
+      <button mat-raised-button color="primary" [disabled]="submitted || (!id && (!pwd || !confirmPwd || pwd!==confirmPwd)) || !up.userName" (click)="submit()">确定</button>
+      &nbsp;&nbsp;
+      <button *ngIf="!standalone" mat-button (click)="cancel()">取消</button>
+    </div>
+  </div>
+  <br>
+
+</div>

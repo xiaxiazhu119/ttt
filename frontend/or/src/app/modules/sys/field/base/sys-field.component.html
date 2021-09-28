@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row align-items-center">
+    <h2 class="strong col-4 col-sm-3 col-md-2 title">
+      领域管理
+    </h2>
+    <div class="col-sm-9 col-md-10 d-none d-sm-block">
+      <app-sys-field-edit-dialog-btn (formSubmitted)="onFormSubmitted()"></app-sys-field-edit-dialog-btn>
+    </div>
+    <div class="col-8 d-sm-none p-0">
+      <app-sys-field-edit-dialog-btn [useIconBtn]="true" (formSubmitted)="onFormSubmitted()"></app-sys-field-edit-dialog-btn>
+    </div>
+  </div>
+
+</div>
+
+<br>
+
+<p class="text-center text-muted" *ngIf="list.length === 0">暂无符合条件的记录</p>
+
+<div class="data-container">
+
+  <div class="data-list data-list-striped container-fluid">
+    <div class="row">
+      <a href="javascript:;" *ngFor="let item of list" class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-1 field-item" (click)="delete(item)">
+        {{item.name}}
+        <span class="close">&times;</span>
+        <i class="close d-md-none">&times;</i>
+      </a>
+    </div>
+  </div>
+</div>

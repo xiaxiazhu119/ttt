@@ -1,0 +1,13 @@
+<div id="console-review-view">
+
+  <app-shared-result-view [id]="resultId" [rv]="result"></app-shared-result-view>
+
+  <br>
+
+  <h3 class="strong">评审项目</h3>
+  <app-shared-score-item-list [taskId]="taskId" [hasFieldColumnLink]="false" [hasOperation]="false" [hasScoreInput]="true" [hasTotalFooter]="true" [scoreInputDisabled]="true" [totalScore]="review.totalScore" (dataLoaded)="onScoreItemsLoaded($event)"></app-shared-score-item-list>
+
+  <h3 class="strong">评审意见</h3>
+  <pre>{{review.opinion}}</pre>
+
+</div>

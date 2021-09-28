@@ -1,0 +1,4 @@
+tornado==6.1
+x_py_libs==0.5.15
+PyMySQL==1.0.2
+mysql_connector_repackaged==0.3.1

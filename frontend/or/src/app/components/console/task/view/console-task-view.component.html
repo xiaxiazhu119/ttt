@@ -1,0 +1,51 @@
+<div id="console-task-view">
+
+  <app-shared-task-view [id]="id" (dataLoaded)="onTaskLoaded($event)"></app-shared-task-view>
+
+  <ng-container [ngSwitch]="user.role">
+
+    <ng-container *ngSwitchCase="roleEnum.Normal">
+      <ng-container>
+        <p [ngClass]="{'text-center': ltLG}" class="pl-4">
+          <button mat-raised-button color="primary" *ngIf="btnTxt" (click)="goToResult()">{{btnTxt}}</button>
+        </p>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="roleEnum.Expert">
+      <ng-container>
+        <div [hidden]="!reviewChecked">
+          <app-shared-result-list [taskId]="task.id" [standalone]="false" [canReview]="task.inReviewing" [isLeader]="isLeader" (editClicked)="onReviewClicked($event)" (viewClicked)="onViewClicked($event)" (statisticsClicked)="onStatisticsClicked($event)" (dataLoaded)="onResultLoaded($event)"></app-shared-result-list>
+        </div>
+        <h3 class="strong">评审专家</h3>
+        <app-group-include-user-list [groupId]="task?.groupId" [hasOperation]="false" (dataLoaded)="onGroupUsersLoaded($event)"></app-group-include-user-list>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="roleEnum.Admin || roleEnum.SA">
+      <ng-container>
+        <div>
+          <app-shared-result-list [taskId]="task.id" [standalone]="false" [canReview]="user.role === roleEnum.SA" [isLeader]="true" (editClicked)="onReviewClicked($event)" (viewClicked)="onViewClicked($event)" (statisticsClicked)="onStatisticsClicked($event)" (dataLoaded)="onResultLoaded($event)"></app-shared-result-list>
+        </div>
+        <h3 class="strong">评审专家</h3>
+        <app-group-include-user-list [groupId]="task?.groupId" [hasOperation]="false" (dataLoaded)="onGroupUsersLoaded($event)"></app-group-include-user-list>
+      </ng-container>
+    </ng-container>
+
+    <!-- <ng-container *ngSwitchCase="roleEnum.SA">
+      <ng-container>
+        <div>
+          <app-shared-result-list [taskId]="task.id" [standalone]="false" [canReview]="true" [isLeader]="true" (editClicked)="onReviewClicked($event)" (viewClicked)="onViewClicked($event)" (statisticsClicked)="onStatisticsClicked($event)" (dataLoaded)="onResultLoaded($event)"></app-shared-result-list>
+        </div>
+        <h3 class="strong">评审专家</h3>
+        <app-group-include-user-list [groupId]="task?.groupId" [hasOperation]="false" (dataLoaded)="onGroupUsersLoaded($event)"></app-group-include-user-list>
+      </ng-container>
+    </ng-container> -->
+
+    <ng-container *ngSwitchDefault>
+
+    </ng-container>
+
+  </ng-container>
+
+</div>

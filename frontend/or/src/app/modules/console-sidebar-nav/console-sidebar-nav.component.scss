@@ -1,0 +1,126 @@
+@import "_theme";
+
+$spacing: 0.8rem;
+#console-sidebar-nav-container-gt-md {
+  height: 100%;
+  padding: $spacing 0;
+  .nav-item {
+    margin-bottom: $spacing;
+    a {
+      display: block;
+      position: relative;
+      width: 100%;
+      padding: 1rem 0;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+
+      &.activated,
+      &:hover {
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+
+        .arrow {
+          display: block;
+          position: absolute;
+          z-index: 1;
+          top: 50%;
+          right: -1.7rem;
+          margin-top: -2rem;
+        }
+      }
+
+      .icon {
+        font-size: 3rem;
+      }
+
+      .arrow {
+        display: none;
+        font-size: 4rem;
+      }
+    }
+  }
+}
+
+$sidebar-nav-lt-lg-height: 5rem;
+#console-sidebar-nav-container-lt-lg {
+  height: $sidebar-nav-lt-lg-height;
+  #console-sidebar-nav-container-lt-lg-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    // padding: 1.2rem 1.5rem;
+    // padding-top: 1rem;
+    height: $sidebar-nav-lt-lg-height;
+    background: $app-color-primary;
+    text-align: center;
+    color: #fff;
+
+    .back,
+    .menu {
+      position: absolute;
+      top: 1.2rem;
+      color: #fff;
+      i {
+        font-size: 3rem;
+      }
+    }
+
+    .back {
+      left: 1.5rem;
+    }
+
+    .menu {
+      // position: absolute;
+      // top: 1.2rem;
+      right: 1.5rem;
+    }
+
+    .title {
+      line-height: $sidebar-nav-lt-lg-height;
+    }
+  }
+}
+
+.fixed-slide-rtl-selection-container {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  z-index: 19;
+  width: 100%;
+  height: 100%;
+  // background: rgba(0, 0, 0, 0.5);
+
+  .mask {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  > .s-c-c {
+    position: relative;
+    z-index: 20;
+    float: right;
+    width: 40%;
+    height: 100%;
+    padding-top: 3rem;
+    // overflow: scroll;
+    @extend .gradient-bg;
+    // background: rgba(0, 0, 0, 0.8);
+
+    > a {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      color: #fff;
+    }
+  }
+
+  .nav-item-lt-lg {
+    padding: 1.2rem;
+    // margin-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    a {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}

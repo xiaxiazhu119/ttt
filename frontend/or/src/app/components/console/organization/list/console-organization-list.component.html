@@ -1,0 +1,67 @@
+<div id="console-organization-list">
+
+
+  <app-base-sc [keywordPlaceholder]="'机构名称/联系人/联系方式'" [hasCreate]="isAdmin" [sc]="sc" (searchClicked)="search()" (createClicked)="goToCreate()"></app-base-sc>
+
+  <div class="data-container">
+    <p xngDataLoading [isLoading]="dataLoading"></p>
+
+    <div class="data-list data-list-striped container-fluid">
+      <div class="data-header-row data-row row">
+        <div class="col-6 col-sm-5 col-md-3">机构名称</div>
+        <div class="col-md-2 d-none d-md-block">联系人</div>
+        <div class="col-md-3 d-none d-md-block">联系方式</div>
+        <div class="col-sm-3 col-md-1 d-none d-sm-block">状态</div>
+        <!-- <div class="col-6 col-sm-4 col-md-3"></div> -->
+      </div>
+      <div class="data-item-row data-row row" *ngFor="let item of list">
+        <div class="col-6 col-sm-5 col-md-3">{{item.name}}</div>
+        <div class="col-md-2 d-none d-md-block">{{item.contact}}</div>
+        <div class="col-md-3 d-none d-md-block">{{item.tel}}</div>
+        <div class="col-sm-3 col-md-1 d-none d-sm-block slide-success-theme">
+          <mat-slide-toggle [checked]="item.enabled" (change)="onStatusChange($event, item)"></mat-slide-toggle>
+        </div>
+        <div class="col-sm-4 col-md-3 d-none d-sm-block">
+          <button mat-button color="primary" (click)="goToEdit(item)">编辑</button>
+          &nbsp;
+          <button mat-button color="accent" (click)="delete(item)">删除</button>
+        </div>
+        <div class="col-6 d-sm-none text-right">
+          <a href="javascript:;" (click)="goToEdit(item)">编辑</a>
+          &nbsp;
+          <a href="javascript:;" class="text-danger" (click)="delete(item)">删除</a>
+          &nbsp;
+          <a href="javascript:;" class="text-warning">禁用</a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <x-ng-libs-bs-pagination [paginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></x-ng-libs-bs-pagination>
+    <!-- <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>机构名称</th>
+          <th class="d-none d-sm-block">联系人</th>
+          <th class="d-none d-sm-block">联系方式</th>
+          <th>状态</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>机构名称</td>
+          <td class="d-none d-sm-block">adfafs</td>
+          <td class="d-none d-sm-block">12345678901</td>
+          <td class="mat-success-theme">
+            <mat-slide-toggle color="primary"></mat-slide-toggle>
+          </td>
+          <td>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+  </div>
+
+</div>

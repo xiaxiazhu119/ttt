@@ -1,0 +1,6 @@
+@import "_app_mixins";
+
+.user-group-select-container {
+  background: #fff;
+  @include slide-b-t-t(6);
+}

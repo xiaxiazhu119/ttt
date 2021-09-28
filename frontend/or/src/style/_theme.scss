@@ -1,0 +1,59 @@
+// @import "~@angular/material/theming";
+@import "~x-ng-libs/assets/material-design";
+
+@import "_variables";
+
+@include mat-core();
+$app-theme-primary: mat-palette($mat-blue, A200);
+$app-theme-accent: mat-palette($mat-red, A400);
+$app-theme-warn: mat-palette($mat-amber, A400);
+$app-theme: mat-light-theme($app-theme-primary, $app-theme-accent, $app-theme-warn);
+
+$app-color-primary: mat-color($app-theme-primary);
+$app-color-accent: mat-color($app-theme-accent);
+$app-color-warn: mat-color($app-theme-warn);
+
+$mat-success-color: mat-color($mat-success-theme-primary);
+
+$alpha: 0.54;
+
+.app-theme {
+  @include angular-material-theme($app-theme);
+
+  .inverse {
+    .mat-input-element {
+      color: #fff;
+    }
+    .mat-form-field-label {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .mat-form-field-underline {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    .mat-form-field-ripple {
+      background-color: rgba(255, 255, 255, 0.87);
+    }
+  }
+  .mat-form-field-ripple {
+    background-color: rgba($app-color-primary, 0.87);
+  }
+}
+
+.slide-success-theme {
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: $mat-success-color !important;
+  }
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: rgba($mat-success-color, 0.54);
+  }
+}
+
+.gradient-bg {
+  background: linear-gradient(
+    180deg,
+    darken($app-color-primary, 40%) 0%,
+    darken($app-color-primary, 30%) 55%,
+    darken($app-color-primary, 20%) 85%,
+    darken($app-color-primary, 10%) 100%
+  );
+}

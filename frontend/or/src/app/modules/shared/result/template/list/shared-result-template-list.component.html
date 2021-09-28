@@ -1,0 +1,47 @@
+<div class="shared-result-template-list">
+
+  <!-- <h3 class="strong" *ngIf="!standalone">成果模板列表</h3> -->
+
+  <app-base-sc *ngIf="hasSC" [keywordPlaceholder]="'名称'" [sc]="sc" (searchClicked)="search()" (createClicked)="goToCreate()" [hasCreate]="hasCreate"></app-base-sc>
+
+  <div class="data-container">
+    <p xngDataLoading [isLoading]="dataLoading"></p>
+    <p xngDataNotFound [count]="list.length"></p>
+    <div *ngIf="list.length > 0" class="data-container">
+      <div class="data-list data-list-striped container-fluid">
+        <div class="data-header-row data-row row">
+          <div class="col-1" *ngIf="hasRadio"></div>
+          <div class="col-8">模板名称</div>
+        </div>
+        <div class="data-item-row data-row row" *ngFor="let item of list">
+          <div class="col-1" *ngIf="hasRadio">
+            <mat-radio-button color="primary" [checked]="item.selected" (change)="onRadioChange($event, item)" [value]="item.selected" [name]="'r-t-l'"></mat-radio-button>
+          </div>
+          <div class="col-8">{{item.name}}
+            <!-- <a href="javascript:;" *ngIf="hasFieldColumnLink" (click)="goToView(item.id)">{{item.name}}</a>
+            <span *ngIf="!hasFieldColumnLink">{{item.name}}</span> -->
+          </div>
+
+
+          <ng-container *ngIf="hasOperation">
+            <div class="col-md-3 d-none d-md-block">
+              <button mat-button color="primary" (click)="goToEdit(item.id)">编辑</button>
+              &nbsp;
+              <button mat-button color="accent" (click)="delete(item.id)">删除</button>
+            </div>
+            <div class="col-3 d-md-none text-center p-0">
+              <a href="javascript:;" class="text-primary" (click)="goToEdit(item.id)">&nbsp;编辑&nbsp;</a>
+              <a href="javascript:;" class="text-danger" (click)="delete(item.id)">&nbsp;删除&nbsp;</a>
+            </div>
+          </ng-container>
+
+        </div>
+
+
+      </div>
+      <br>
+      <!-- <x-ng-libs-bs-pagination [paginationConfig]="pgCfg" (pageChanged)="onPageChange($event)"></x-ng-libs-bs-pagination> -->
+    </div>
+  </div>
+
+</div>

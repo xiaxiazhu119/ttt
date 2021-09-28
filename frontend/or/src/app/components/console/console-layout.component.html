@@ -1,0 +1,30 @@
+<div id="o-r-console-container" class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-lg-1 d-none d-lg-block" id="sidebar-nav-container">
+      <app-console-sidebar-nav (navLoaded)="onNavLoad($event)"></app-console-sidebar-nav>
+    </div>
+
+    <div class="col-md-12 col-lg-11">
+      <div id="console-body">
+        <div class="d-lg-none">
+          <app-console-sidebar-nav></app-console-sidebar-nav>
+        </div>
+        <h1 class="component-title d-none d-lg-block" [ngClass]="{'has-back': hasBack}">
+          <a href="javascript:;" class="back" (click)="back()"><i class="material-icons">arrow_back</i></a>
+          {{pageTitle}}
+        </h1>
+        <router-outlet></router-outlet>
+        <div class="d-lg-none">
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<app-console-user-nav></app-console-user-nav>

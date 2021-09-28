@@ -1,0 +1,45 @@
+<div id="console-group-edit">
+
+  <div class="container-fluid">
+    <div class="row align-items-center">
+
+      <div class="col-8 col-md-4 col-lg-3">
+        <mat-form-field class="full-width">
+          <mat-label>专家组名称</mat-label>
+          <input matInput type="text" placeholder="专家组名称" maxlength="20" [(ngModel)]="group.name">
+        </mat-form-field>
+      </div>
+      <div class="col-2 col-lg-1">
+        <button mat-raised-button color="primary" type="button" [disabled]="submitted || !group.name" (click)="submit()">提交</button>
+      </div>
+      <div class="col-sm-2 d-none d-sm-block" *ngIf="group.id">
+        <app-group-exclude-user-dialog-btn [id]="group.id" [users]="users" (dialogConfirmed)="onUserSelectConfirm($event)"></app-group-exclude-user-dialog-btn>
+      </div>
+      <div class="col-2 d-sm-none p-0" *ngIf="group.id">
+        <!-- <a href="javascript:;" (click)="goToCreate()">新建</a> -->
+        <button mat-mini-fab color="primary" type="button" class="create-btn sm" (click)="showELT = !showELT">
+          <i class="material-icons">add</i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+
+  <app-group-include-user-list [groupId]="group.id" [users]="users" (dataChanged)="onDataChanged($event)"></app-group-include-user-list>
+
+</div>
+
+<div id="expert-list-for-sm" [ngClass]="{'slide-rtl': showELT}">
+  <div id="elt">
+    <a href="javascript:;" class="back" (click)="showELT = !showELT"><i class="material-icons">arrow_back</i></a>
+    <h3 class="text-center title">添加成员</h3>
+  </div>
+  <br>
+  <app-group-exclude-user-list [id]="group.id" [users]="users" (userChanged)="onUserSelectConfirm($event)"></app-group-exclude-user-list>
+  <br>
+  <p class="text-center">
+    <button mat-raised-button color="primary" type="button">确定</button>&nbsp;&nbsp;<button mat-button type="button" (click)="showELT = !showELT">取消</button>
+  </p>
+</div>

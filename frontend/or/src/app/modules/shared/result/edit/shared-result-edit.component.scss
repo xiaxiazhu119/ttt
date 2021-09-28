@@ -1,0 +1,19 @@
+.preview-img-container {
+  position: relative;
+  > a {
+    display: block;
+    width: 100%;
+    // z-index: 0;
+    border: 1px solid #ddd;
+
+    > img {
+    }
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: -0.5rem;
+    z-index: 1;
+  }
+}
